@@ -27,7 +27,7 @@ public class AdminController {
         session.setAttribute("admin", admin);
 
         System.out.println(admin);
-        return "redirect:/main/main.jsp";
+        return "redirect:/menu/queryAll";
     }
 
 }
