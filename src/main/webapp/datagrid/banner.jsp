@@ -56,7 +56,7 @@
         $('#dg').edatagrid({
             method: "POST",
             updateUrl: "${pageContext.request.contextPath}/banner/update",
-            url: '${pageContext.request.contextPath}/banner/queryAll',
+            url: '${pageContext.request.contextPath}/banner/queryByPage',
             columns: [[
                 {field: 'title', title: '名称', width: 100, align: 'center'},
                 {

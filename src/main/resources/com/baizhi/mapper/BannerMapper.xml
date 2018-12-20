@@ -9,7 +9,7 @@
 
     <!-- 查询每页数据的行数 -->
     <select id="selectByPage" resultType="com.baizhi.entity.Banner">
-
+        select * from banner order by id desc limit ${(curPage-1)*pageSize},${pageSize}
     </select>
 
 </mapper>

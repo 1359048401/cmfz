@@ -20,4 +20,5 @@ spring:
     time-zone: GMT+8
 mybatis:
   type-aliases-package: com.baizhi.entity
+  mapper-locations: classpath:com/baizhi/mapper/*Mapper.xml
 #手动写sql需要加入mapperLocations

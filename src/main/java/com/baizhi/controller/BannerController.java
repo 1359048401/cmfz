@@ -1,6 +1,7 @@
 package com.baizhi.controller;
 
 import com.baizhi.entity.Banner;
+import com.baizhi.entity.BannerDto;
 import com.baizhi.service.BannerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,5 +48,12 @@ public class BannerController {
     @RequestMapping("delete")
     public void deleteBanner(Integer id) {
         bannerService.deleteBanner(id);
+    }
+
+    @RequestMapping("queryByPage")
+    public BannerDto queryByPage(int page, int rows) {
+        BannerDto dto = bannerService.queryByPage(page, rows);
+        System.out.println(dto);
+        return dto;
     }
 }
