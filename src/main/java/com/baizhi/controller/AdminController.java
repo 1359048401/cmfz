@@ -17,7 +17,6 @@ public class AdminController {
 
     @RequestMapping("login")
     public String adminLogin(Admin admin, String enCode, HttpSession session) {
-        System.out.println(admin.getName() + "---" + admin.getPassword());
         String code = (String) session.getAttribute("code");
         if (!code.equals(enCode)) {
             throw new RuntimeException("验证码错误");
@@ -25,7 +24,6 @@ public class AdminController {
         Admin ad = adminService.queryByName(admin);
         session.setAttribute("admin", ad);
 
-        System.out.println(ad);
         return "redirect:/main/main.jsp";
     }
 

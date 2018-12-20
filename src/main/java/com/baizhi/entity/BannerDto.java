@@ -1,15 +1,16 @@
 package com.baizhi.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class BannerDto implements Serializable {
-    @Transient
     private List<Banner> rows;
-    @Transient
     private Integer total;
 }
