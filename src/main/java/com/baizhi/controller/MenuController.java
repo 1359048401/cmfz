@@ -15,10 +15,14 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
 
-    @RequestMapping("queryAll")
-    public List<Menu> queryAll(){
-        return menuService.queryAll();
-    }
+//    @RequestMapping("queryAll")
+//    public List<Menu> queryAll(){
+//        return menuService.queryAll();
+//    }
 
+    @RequestMapping("queryByParentId")
+    public List<Menu> queryByParentId(Integer parent_id) {
+        return menuService.queryByParentId(parent_id);
+    }
 
 }

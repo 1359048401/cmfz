@@ -1,16 +1,75 @@
-﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>持名法州主页</title>
     <link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="../themes/IconExtension.css">
+    <link rel="stylesheet" type="text/css" href="../themes/icon.css">
     <script type="text/javascript" src="../js/jquery.min.js"></script>
     <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/datagrid-detailview.js"></script>
+    <script type="text/javascript" src="../js/jquery.edatagrid.js"></script>
     <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript">
         <!--菜单处理-->
+        $(function () {
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: "${pageContext.request.contextPath}/menu/queryByParentId?parent_id=0",
+                success: function (result) {
+                    $.each(result, function (index, element) {
+                        var id = element.id;
+                        //console.log(id);
+                        $("#aa").accordion("add", {
+                            title: result[index].title,
+                            content: '<div style="padding:10px 0px"><ul id="tree' + id + '" class="easyui-tree"></ul></div>',
+                            selected: false
+                        });
+
+                        $.ajax({
+                            type: "POST",
+                            dataType: "JSON",
+                            url: "${pageContext.request.contextPath}/menu/queryByParentId?parent_id=" + id,
+                            success: function (data) {
+                                //console.log(data);
+                                $("#tree" + id).tree({
+                                    data: data,
+                                    formatter: function (value) {
+                                        //console.log(value);
+                                        return value.title;
+                                    },
+                                    onClick: function (node) {
+                                        var btn = $("#tree" + id).tree("isLeaf", node.target);
+                                        if (btn) {
+                                            //console.log(node);
+                                            addTabs(node);
+                                        }
+                                    }
+                                })
+                            }
+                        })
+                    })
+                }
+            });
+
+        });
+
+        function addTabs(node) {
+            var text = node.title;
+            if ($("#tt").tabs("exists", text)) {
+                $("#tt").tabs("select", text);
+            } else {
+                $("#tt").tabs("add", {
+                    title: text,
+                    selected: true,
+                    closable: true,
+                    href: "${pageContext.request.contextPath}/" + node.url
+                })
+            }
+        }
     </script>
 
 </head>
@@ -21,7 +80,7 @@
     </div>
     <div style="font-size: 16px;color: #FAF7F7;font-family: 楷体;width: 300px;float:right;padding-top:15px">
         欢迎您:${sessionScope.admin.name} &nbsp;<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改密码</a>&nbsp;&nbsp;<a
-            href="#" class="easyui-linkbutton" data-options="iconCls:'icon-01'">退出系统</a></div>
+            href="#" class="easyui-linkbutton" data-options="iconCls:'icon-back'">退出系统</a></div>
 </div>
 <div data-options="region:'south',split:true" style="height: 40px;background: #5C160C">
     <div style="text-align: center;font-size:15px; color: #FAF7F7;font-family: 楷体">&copy;百知教育 htf@zparkhr.com.cn</div>

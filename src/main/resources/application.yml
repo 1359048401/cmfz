@@ -15,6 +15,9 @@ spring:
     view:
       prefix: /
       suffix: .jsp
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8
 mybatis:
   type-aliases-package: com.baizhi.entity
 #手动写sql需要加入mapperLocations

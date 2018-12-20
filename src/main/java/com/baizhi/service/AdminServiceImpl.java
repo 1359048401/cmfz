@@ -14,15 +14,13 @@ public class AdminServiceImpl implements AdminService {
     private AdminMapper adminMapper;
 
     @Override
-    public Admin queryByName(String name, String password) {
-        Admin ad = new Admin();
-        ad.setName(name);
-        Admin admin = adminMapper.selectOne(ad);
-        if (admin == null) {
+    public Admin queryByName(Admin admin) {
+        Admin ad = adminMapper.selectOne(admin);
+        if (ad == null) {
             throw new RuntimeException("账户不存在！");
-        } else if (!password.equals(admin.getPassword())) {
+        } else if (!admin.getPassword().equals(ad.getPassword())) {
             throw new RuntimeException("密码错误！");
         }
-        return admin;
+        return ad;
     }
 }

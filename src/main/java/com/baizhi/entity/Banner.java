@@ -1,8 +1,10 @@
 package com.baizhi.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
@@ -20,6 +22,8 @@ public class Banner implements Serializable {
     private Integer id;
     private String title;
     private String img_path;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JSONField(format = "yyyy-MM-dd")
     private Date pub_date;
     private String description;
     private String status;

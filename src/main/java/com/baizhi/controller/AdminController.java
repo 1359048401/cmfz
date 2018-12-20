@@ -3,12 +3,12 @@ package com.baizhi.controller;
 import com.baizhi.entity.Admin;
 import com.baizhi.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 
-@RestController
+@Controller
 @RequestMapping("admin")
 public class AdminController {
 
@@ -16,18 +16,17 @@ public class AdminController {
     private AdminService adminService;
 
     @RequestMapping("login")
-    public String adminLogin(String name, String password, String enCode, HttpSession session) {
-        System.out.println(name);
-        System.out.println(password);
+    public String adminLogin(Admin admin, String enCode, HttpSession session) {
+        System.out.println(admin.getName() + "---" + admin.getPassword());
         String code = (String) session.getAttribute("code");
         if (!code.equals(enCode)) {
             throw new RuntimeException("验证码错误");
         }
-        Admin admin = adminService.queryByName(name, password);
-        session.setAttribute("admin", admin);
+        Admin ad = adminService.queryByName(admin);
+        session.setAttribute("admin", ad);
 
-        System.out.println(admin);
-        return "redirect:/menu/queryAll";
+        System.out.println(ad);
+        return "redirect:/main/main.jsp";
     }
 
 }
