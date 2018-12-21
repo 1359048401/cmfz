@@ -15,11 +15,11 @@ public class MenuServiceImpl implements MenuService {
     @Autowired
     private MenuMapper menuMapper;
 
-//    @Override
-//    public List<Menu> queryAll() {
-//        List<Menu> list = menuMapper.selectAll();
-//        return list;
-//    }
+    @Override
+    public List<Menu> queryAll() {
+        List<Menu> list = menuMapper.selectAll();
+        return list;
+    }
 
     @Override
     public List<Menu> queryByParentId(Integer parent_id) {

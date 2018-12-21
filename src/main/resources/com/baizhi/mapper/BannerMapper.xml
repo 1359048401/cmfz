@@ -2,11 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="com.baizhi.mapper.BannerMapper">
 
-    <!--&lt;!&ndash; 查询数据的总量 &ndash;&gt;-->
-    <!--<select id="selectCount" resultType="java.lang.Integer">-->
-    <!--select count(*) from banner-->
-    <!--</select>-->
-
     <!-- 查询每页数据的行数 -->
     <select id="selectByPage" resultType="Banner">
         select * from banner limit ${(curPage-1)*pageSize},${pageSize}

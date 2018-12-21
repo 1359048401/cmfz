@@ -1,5 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+﻿<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,10 +24,10 @@
                         //console.log(id);
                         $("#aa").accordion("add", {
                             title: result[index].title,
+                            iconCls: result[index].iconcls,
                             content: '<div style="padding:10px 0px"><ul id="tree' + id + '" class="easyui-tree"></ul></div>',
                             selected: false
                         });
-
                         $.ajax({
                             type: "POST",
                             dataType: "JSON",
@@ -54,9 +53,7 @@
                     })
                 }
             });
-
         });
-
         function addTabs(node) {
             var text = node.title;
             if ($("#tt").tabs("exists", text)) {
@@ -71,7 +68,6 @@
             }
         }
     </script>
-
 </head>
 <body class="easyui-layout">
 <div data-options="region:'north',split:true" style="height:60px;background-color:  #5C160C">
