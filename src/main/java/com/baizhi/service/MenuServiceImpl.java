@@ -17,7 +17,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<Menu> queryAll() {
-        List<Menu> list = menuMapper.selectAll();
+        List<Menu> list = menuMapper.queryAll();
         return list;
     }
 

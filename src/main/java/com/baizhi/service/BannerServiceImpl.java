@@ -42,7 +42,6 @@ public class BannerServiceImpl implements BannerService {
         BannerDto dto = new BannerDto();
         dto.setTotal(bannerMapper.selectCount(new Banner()));
         dto.setRows(bannerMapper.selectByPage(curPage, pageSize));
-        System.out.println(dto);
         return dto;
     }
 }

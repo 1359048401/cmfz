@@ -95,10 +95,8 @@
             modal: true,
             closed: true,
             href: "${pageContext.request.contextPath}/dialog/addBanner.jsp"
-        })
-
-    })
-
+        });
+    });
 </script>
 
 <table id="dg"></table>

@@ -1,14 +1,17 @@
 package com.baizhi.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -23,7 +26,10 @@ public class Album implements Serializable {
     private String cover_img;
     private Integer score;
     private String author;
-    private String broadcst;
+    private String broadcast;
     private String brief;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JSONField(format = "yyyy-MM-dd")
     private Date pub_date;
+    private List<Chapter> children;
 }

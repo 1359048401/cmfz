@@ -15,56 +15,40 @@
         <!--菜单处理-->
         $(function () {
             $.ajax({
-                type: "POST",
+                type: "get",
+                url: "${pageContext.request.contextPath}/menu/queryAll",
                 dataType: "JSON",
-                url: "${pageContext.request.contextPath}/menu/queryByParentId?parent_id=0",
-                success: function (result) {
-                    $.each(result, function (index, element) {
-                        var id = element.id;
-                        //console.log(id);
-                        $("#aa").accordion("add", {
-                            title: result[index].title,
-                            iconCls: result[index].iconcls,
-                            content: '<div style="padding:10px 0px"><ul id="tree' + id + '" class="easyui-tree"></ul></div>',
+                success: function (data) {
+                    $.each(data, function (index, first) {
+                        var a = "";
+                        $.each(first.list, function (index1, second) {
+                            a += "<p style='text-align: center'><a id=\"btn\" class=\"easyui-linkbutton\" onclick=\"addTabs('" + second.title + "','" + second.iconcls + "','" + second.url + "')\" data-options=\"iconCls:'" + second.iconcls + "'\">" + second.title + "</a></p>";
+                        })
+                        $('#aa').accordion('add', {
+                            title: first.title,
+                            iconCls: first.iconcls,
+                            content: a,
                             selected: false
                         });
-                        $.ajax({
-                            type: "POST",
-                            dataType: "JSON",
-                            url: "${pageContext.request.contextPath}/menu/queryByParentId?parent_id=" + id,
-                            success: function (data) {
-                                //console.log(data);
-                                $("#tree" + id).tree({
-                                    data: data,
-                                    formatter: function (value) {
-                                        //console.log(value);
-                                        return value.title;
-                                    },
-                                    onClick: function (node) {
-                                        var btn = $("#tree" + id).tree("isLeaf", node.target);
-                                        if (btn) {
-                                            //console.log(node);
-                                            addTabs(node);
-                                        }
-                                    }
-                                })
-                            }
-                        })
+
                     })
                 }
-            });
-        });
-        function addTabs(node) {
-            var text = node.title;
-            if ($("#tt").tabs("exists", text)) {
-                $("#tt").tabs("select", text);
+            })
+        })
+
+        function addTabs(title, iconcls, url) {
+            var a = $("#tt").tabs("exists", title);
+            if (a) {
+                $("#tt").tabs("select", title);
             } else {
-                $("#tt").tabs("add", {
-                    title: text,
+                $('#tt').tabs('add', {
+                    title: title,
+                    iconCls: iconcls,
+                    href: "${pageContext.request.contextPath}" + url,
                     selected: true,
-                    closable: true,
-                    href: "${pageContext.request.contextPath}/" + node.url
-                })
+                    closable: true
+
+                });
             }
         }
     </script>

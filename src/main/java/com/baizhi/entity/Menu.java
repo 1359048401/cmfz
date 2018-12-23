@@ -8,6 +8,7 @@ import tk.mybatis.mapper.annotation.KeySql;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -21,4 +22,5 @@ public class Menu implements Serializable {
     private String url;
     private String iconcls;
     private Integer parent_id;
+    private List<Menu> list;
 }

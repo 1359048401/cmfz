@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.mapper.MenuMapper">
+
+    <resultMap id="rm" type="Menu">
+        <id column="m1_id" property="id"/>
+        <result column="m1_title" property="title"/>
+        <result column="m1_url" property="url"/>
+        <result column="m1_iconcls" property="iconcls"/>
+        <collection property="list" ofType="Menu">
+            <id column="id" property="id"/>
+            <result column="title" property="title"/>
+            <result column="url" property="url"/>
+            <result column="iconcls" property="iconcls"/>
+        </collection>
+    </resultMap>
+
+    <select id="queryAll" resultMap="rm">
+        select m1.id m1_id ,m1.title m1_title , m1.url m1_url , m1.iconcls m1_iconcls , m2.*
+        from menu m1 left join menu m2
+        on m1.id = m2.parent_id
+        where m1.parent_id = 0
+        order by m1.id
+    </select>
+
+
+</mapper>

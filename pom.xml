@@ -71,6 +71,14 @@
       <artifactId>fastjson</artifactId>
       <version>1.2.54</version>
     </dependency>
+      <!-- 文件下载 -->
+      <!-- https://mvnrepository.com/artifact/org/jaudiotagger -->
+      <dependency>
+          <groupId>org</groupId>
+          <artifactId>jaudiotagger</artifactId>
+          <version>2.0.1</version>
+      </dependency>
+
 
   </dependencies>
 
