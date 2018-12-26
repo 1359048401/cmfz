@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <script type="text/javascript">
     $(function () {
-        var toolbar = [{
+        var toolbar;
+        toolbar = [{
             iconCls: 'icon-add',
             text: "添加",
             handler: function () {
@@ -51,7 +52,27 @@
             handler: function () {
                 $("#dg").edatagrid("saveRow");
             }
-        }]
+        }, '-', {
+            text: "导出",
+            iconCls: "icon-undo",
+            handler: function () {
+                $.post(
+                    "${pageContext.request.contextPath}/banner/exportBanner",
+                    function () {
+                        $.messager.show({
+                            title: '系统提示',
+                            msg: '导出成功',
+                            showType: 'slide'
+                        });
+                    });
+            }
+        }, '-', {
+            text: "导入",
+            iconCls: "icon-redo",
+            handler: function () {
+                alert("导入功能");
+            }
+        }];
 
         $('#dg').edatagrid({
             method: "POST",
